@@ -1,20 +1,26 @@
+import http from 'http';
 import express from 'express';
-import cors from 'cors';
+import { applyMiddleware, applyRoutes } from './utils';
+import middleware from './middleware';
+import errorHandlers from './middleware/errorHandlers';
+import routes from './services';
 
-const app = express();
-const port = 8080; //
-
-
-app.use(cors);
-
-app.use(express.json());
-
-// define a route handler for the default home page
-app.get('/', (req, res) => {
-  res.send('Hello world!');
+process.on('uncaughtException', (e) => {
+  console.log(e);
+  process.exit(1);
 });
 
-// start the Express server
-app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
+process.on('unhandledRejection', (e) => {
+  console.log(e);
+  process.exit(1);
 });
+
+const router = express();
+applyMiddleware(middleware, router);
+applyRoutes(routes, router);
+applyMiddleware(errorHandlers, router);
+
+const { PORT = 3000 } = process.env;
+const server = http.createServer(router);
+
+server.listen(PORT, () => console.log(`Server is running http://localhost:${PORT}...`));
