@@ -4,7 +4,7 @@ import request from "supertest";
 import { applyMiddleware, applyRoutes } from "../../utils";
 import middleware from "../../middleware";
 import errorHandlers from "../../middleware/errorHandlers";
-import routes from "../../services/lists/routes";
+import routes from "./routes";
 
 describe("routes", () => {
   let router: Router;
