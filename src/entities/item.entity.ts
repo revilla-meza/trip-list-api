@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, JoinTable, Column, ManyToOne, ManyToMany } from 'typeorm';
 import { User } from './user.entity';
 import { Category } from './category.entity';
+import { List } from './list.entity';
 
 @Entity()
 export class Item {
@@ -22,4 +23,7 @@ export class Item {
   @ManyToMany((type) => Category)
   @JoinTable()
   categories: Category[];
+
+  @ManyToMany(type => List, (list) => list.items)
+  lists: List[];
 }

@@ -1,4 +1,4 @@
-import ListController from './ListsController';
+import ListController from './ListController';
 
 const controller = new ListController();
 

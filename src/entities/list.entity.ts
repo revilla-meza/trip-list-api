@@ -11,16 +11,14 @@ export class List {
   @Column()
   name: string;
 
-  @ManyToMany(type => Item)
+  @ManyToMany(type => Item, (item) => item.lists, { cascade: true })
   @JoinTable()
   items: Item[];
 
-  @ManyToMany(type => Category)
+  @ManyToMany(type => Category, { cascade: true })
   @JoinTable()
   categories: Category[];
 
   @ManyToOne(type => User)
   user: User;
-
-
 }

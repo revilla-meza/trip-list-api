@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { getRepository } from 'typeorm';
 import { List } from '../../entities/list.entity';
 import { IGetUserAuthInfoRequest } from "../../types";
 
 
-class ListsController {
+class ListController {
   public rootPath = '/list';
 
   private listRepository = getRepository(List);
@@ -44,4 +44,4 @@ class ListsController {
   }
 }
 
-export default ListsController;
+export default ListController;
