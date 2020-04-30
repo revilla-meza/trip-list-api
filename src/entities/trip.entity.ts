@@ -19,10 +19,10 @@ export class Trip {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   destination: string;
 
-  @Column()
+  @Column({ nullable: true })
   flight_number: number;
 
   @Column({

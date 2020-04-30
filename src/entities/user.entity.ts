@@ -1,9 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Index } from "typeorm";
 import { Item } from "./item.entity";
 import { Trip } from "./trip.entity";
 import { Category } from "./category.entity";
 import { List } from "./list.entity";
-
 
 @Entity()
 export class User {
@@ -11,7 +10,8 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Index()
+  @Column({ unique: true })
   email: string;
 
   @OneToMany(type => Trip, trip => trip.user)
