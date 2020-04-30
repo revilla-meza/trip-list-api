@@ -1,4 +1,7 @@
 import 'reflect-metadata';
+import dotenv from 'dotenv';
+dotenv.config()
+import dbConfig from '../ormconfig';
 import http from 'http';
 import express from 'express';
 import { applyMiddleware, applyRoutes } from './utils';
@@ -20,7 +23,7 @@ process.on('unhandledRejection', (e) => {
 
 validateEnv();
 
-createConnection().then(() => {
+createConnection(dbConfig).then(() => {
   const router = express();
   applyMiddleware(middleware, router);
   applyRoutes(routes, router);
