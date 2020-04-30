@@ -44,3 +44,4 @@ types/compiled
 dist
 .project
 .env
+docker.env
