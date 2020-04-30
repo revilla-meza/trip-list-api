@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, JoinColumn, Column, OneToOne, ManyToOne } from "typeorm";
 import { TravelMethod } from '../types';
 import { List } from "./list.entity";
 import { User } from "./user.entity";
@@ -9,7 +9,8 @@ export class Trip {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @OneToOne(type => List)
+  @JoinColumn()
   list: List;
 
   @ManyToOne(type => User, user => user.trips)
