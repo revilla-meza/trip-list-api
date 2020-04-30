@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import dotenv from 'dotenv';
-dotenv.config()
-import dbConfig from '../ormconfig';
+dotenv.config();
+import dbConfig from './ormconfig';
 import http from 'http';
 import express from 'express';
 import { applyMiddleware, applyRoutes } from './utils';

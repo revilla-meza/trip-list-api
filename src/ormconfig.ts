@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
-import entities from './src/entities';
+import entities from './entities';
 
 const config: ConnectionOptions = {
   type: 'postgres',
