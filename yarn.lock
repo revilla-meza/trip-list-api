@@ -2260,10 +2260,9 @@ expect@^25.4.0:
     jest-message-util "^25.4.0"
     jest-regex-util "^25.2.6"
 
-express-jwt-authz@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/express-jwt-authz/-/express-jwt-authz-2.3.1.tgz#b23e5b93646700acf3564a2e33479ae3e217614f"
-  integrity sha512-cChqAjXe8E3KDe4XbmkpYpk/vQdy4s3n1ccxVgij+2F0rS86hiOQvTrYnHBc1jZstqpGrOzLgHMByh046fKgyQ==
+express-jwt-authz@auth0/express-jwt-authz#master:
+  version "2.3.0"
+  resolved "https://codeload.github.com/auth0/express-jwt-authz/tar.gz/3a1526cc2a4fe353b58a3d3721767cd06e6601ee"
 
 express-jwt@^5.3.3:
   version "5.3.3"

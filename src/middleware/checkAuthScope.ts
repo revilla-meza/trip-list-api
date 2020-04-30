@@ -1,4 +1,4 @@
-const jwtAuthz = require('express-jwt-authz');
+import jwtAuthz from 'express-jwt-authz';
 
 const checkAuthScope = (...permisions:string[]) => {
    return jwtAuthz(permisions);

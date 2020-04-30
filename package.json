@@ -44,7 +44,7 @@
     "envalid": "^6.0.1",
     "express": "5.0.0-alpha.7",
     "express-jwt": "^5.3.3",
-    "express-jwt-authz": "^2.3.1",
+    "express-jwt-authz": "auth0/express-jwt-authz#master",
     "jwks-rsa": "^1.8.0",
     "pg": "^8.0.2",
     "pm2": "^4.4.0",
