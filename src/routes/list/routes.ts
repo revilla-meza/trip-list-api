@@ -15,28 +15,28 @@ const Routes = [
     method: 'get',
     getHandler: (controller:any) => controller.getOneList,
     controller,
-    root: "trip",
+    root: "list",
   },
   {
     path: controller.rootPath,
     method: 'post',
     getHandler: (controller:any) => controller.createList,
     controller,
-    root: "trip",
+    root: "list",
   },
   {
     path: controller.rootPath + '/:listId',
     method: 'patch',
     getHandler: (controller:any) => controller.updateList,
     controller,
-    root: "trip",
+    root: "list",
   },
   {
     path: controller.rootPath + '/:listId',
     method: 'delete',
     getHandler: (controller:any) => controller.deleteList,
     controller,
-    root: "trip",
+    root: "list",
   },
 ];
 
