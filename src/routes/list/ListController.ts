@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { getRepository } from 'typeorm';
 import { List } from '../../entities/list.entity';
-import { IGetUserAuthInfoRequest } from "../../types";
+import { GetUserAuthInfoRequest } from "../../types";
 
 
 class ListController {
@@ -9,7 +9,7 @@ class ListController {
 
   private listRepository = getRepository(List);
  
-  getAllLists = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getAllLists = async (request: GetUserAuthInfoRequest, response: Response) => {
     const lists = 
       await this.listRepository.find({
         where: { 
@@ -20,25 +20,25 @@ class ListController {
     response.json(lists);
   }
 
-  getOneList = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getOneList = async (request: GetUserAuthInfoRequest, response: Response) => {
     const list = await this.listRepository.findOne(request.params.listId);
     response.json(list);
   }
 
-  createList = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  createList = async (request: GetUserAuthInfoRequest, response: Response) => {
     const list = await this.listRepository.create(request.body);
     const results = await this.listRepository.save(list);
     response.json(results);
   }
 
-  updateList = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  updateList = async (request: GetUserAuthInfoRequest, response: Response) => {
     const list = await this.listRepository.findOne(request.params.listId);
     this.listRepository.merge(list, request.body);
     const results = await this.listRepository.save(list);
     response.json(results);
   }
 
-  deleteList = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  deleteList = async (request: GetUserAuthInfoRequest, response: Response) => {
     const results = await this.listRepository.delete(request.params.listId);
     response.json(results);
   }

@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { getRepository } from 'typeorm';
 import { Trip } from '../../entities/trip.entity';
 import { List } from '../../entities/list.entity';
-import { IGetUserAuthInfoRequest } from '../../types';
+import { GetUserAuthInfoRequest } from '../../types';
 
 class TripController {
   static rootPath = '/trip';
@@ -10,7 +10,7 @@ class TripController {
   private tripRepository = getRepository(Trip);
   private listRepository = getRepository(List);
 
-  getAllTrips = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getAllTrips = async (request: GetUserAuthInfoRequest, response: Response) => {
     const trips = await this.tripRepository.find({
       where: {
         userId: request.user[process.env.AUTH0_AUDIENCE + '/userId'],
@@ -20,12 +20,12 @@ class TripController {
     response.json(trips);
   };
 
-  getOneTrip = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getOneTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     const trip = await this.tripRepository.findOne(request.params.tripId);
     response.json(trip);
   };
 
-  createTrip = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  createTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     const userId = request.user[process.env.AUTH0_AUDIENCE + '/userId'];
 
     const newList = await this.listRepository.create({ user: userId, title: `List for ${request.body.trip.title}` });
@@ -38,14 +38,14 @@ class TripController {
     response.json(results);
   };
 
-  updateTrip = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  updateTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     const trip = await this.tripRepository.findOne(request.params.tripId);
     this.tripRepository.merge(trip, request.body);
     const results = await this.tripRepository.save(trip);
     response.json(results);
   };
 
-  deleteTrip = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  deleteTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     const results = await this.tripRepository.delete(request.params.tripId);
     response.json(results);
   };

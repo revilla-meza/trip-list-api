@@ -1,14 +1,14 @@
 import { Response } from "express";
 import { getRepository } from 'typeorm';
 import { Item } from '../../entities/item.entity';
-import { IGetUserAuthInfoRequest } from "../../types";
+import { GetUserAuthInfoRequest } from "../../types";
 
 class ItemController {
   static rootPath = '/item';
 
   private itemRepository = getRepository(Item);
 
-  getAllItems = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getAllItems = async (request: GetUserAuthInfoRequest, response: Response) => {
     const items = 
       await this.itemRepository.find({
         where: { 
@@ -19,7 +19,7 @@ class ItemController {
     response.json(items);
   }
 
-  getItemsForList = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getItemsForList = async (request: GetUserAuthInfoRequest, response: Response) => {
     const items = await this.itemRepository
       .createQueryBuilder("item")
       .where(":listId = ANY(item.lists)", { listId: request.params.listId })
@@ -28,7 +28,7 @@ class ItemController {
     response.json(items);
   }
 
-  getItemsForCategory = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getItemsForCategory = async (request: GetUserAuthInfoRequest, response: Response) => {
     const items = await this.itemRepository
       .createQueryBuilder("item")
       .where(":categoryId = ANY(item.categories)", { categoryId: request.params.categoryId })
@@ -37,25 +37,25 @@ class ItemController {
     response.json(items);
   }
 
-  getOneItem = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  getOneItem = async (request: GetUserAuthInfoRequest, response: Response) => {
     const item = await this.itemRepository.findOne(request.params.itemId);
     response.json(item);
   }
 
-  createItem = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  createItem = async (request: GetUserAuthInfoRequest, response: Response) => {
     const item = await this.itemRepository.create(request.body);
     const results = await this.itemRepository.save(item);
     response.json(results);
   }
 
-  updateItem = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  updateItem = async (request: GetUserAuthInfoRequest, response: Response) => {
     const item = await this.itemRepository.findOne(request.params.itemId);
     this.itemRepository.merge(item, request.body);
     const results = await this.itemRepository.save(item);
     response.json(results);
   }
 
-  deleteItem = async (request: IGetUserAuthInfoRequest, response: Response) => {
+  deleteItem = async (request: GetUserAuthInfoRequest, response: Response) => {
     const results = await this.itemRepository.delete(request.params.itemId);
     response.json(results);
   }
