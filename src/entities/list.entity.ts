@@ -9,7 +9,7 @@ export class List {
   id: number;
 
   @Column()
-  name: string;
+  title: string;
 
   @ManyToMany(type => Item, (item) => item.lists, { cascade: true })
   @JoinTable()

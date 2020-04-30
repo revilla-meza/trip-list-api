@@ -9,7 +9,7 @@ export class Trip {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(type => List)
+  @OneToOne(type => List, { cascade: true })
   @JoinColumn()
   list: List;
 
@@ -18,6 +18,9 @@ export class Trip {
 
   @Column()
   title: string;
+
+  @Column()
+  destination: string;
 
   @Column()
   flight_number: number;
