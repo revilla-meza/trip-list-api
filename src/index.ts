@@ -5,6 +5,7 @@ import { createConnection } from 'typeorm';
 import middleware from './middleware';
 import errorHandlers from './middleware/errorHandlers';
 import routes from './routes';
+import validateEnv from './utils/validateEnv';
 
 process.on('uncaughtException', (e) => {
   console.log(e);
@@ -16,6 +17,7 @@ process.on('unhandledRejection', (e) => {
   process.exit(1);
 });
 
+validateEnv();
 
 createConnection().then(() => {
   const router = express();
