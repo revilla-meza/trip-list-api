@@ -4,7 +4,7 @@ import { User } from '../../entities/user.entity';
 import { IGetUserAuthInfoRequest } from "../../types";
 
 class UserController {
-  public rootPath = '/user';
+  static rootPath = '/user';
 
   private userRepository = getRepository(User);
 

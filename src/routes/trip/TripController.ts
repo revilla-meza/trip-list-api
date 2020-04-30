@@ -5,7 +5,7 @@ import { List } from '../../entities/list.entity';
 import { IGetUserAuthInfoRequest } from '../../types';
 
 class TripController {
-  public rootPath = '/trip';
+  static rootPath = '/trip';
 
   private tripRepository = getRepository(Trip);
   private listRepository = getRepository(List);

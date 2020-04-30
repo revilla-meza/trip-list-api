@@ -1,27 +1,37 @@
 import UserController from './UserController';
 
-const controller = new UserController();
+const controller = UserController;
 
 const Routes = [
   {
     path: controller.rootPath + '/:userId',
     method: 'get',
-    handler: controller.getOneUser,
+    getHandler: (controller:any) => controller.getOneUser,
+    controller,
+    root: "user",
+
   },
   {
     path: controller.rootPath,
     method: 'post',
-    handler: controller.createUser,
+    getHandler: (controller:any) => controller.createUser,
+    controller,
+    root: "user",
+
   },
   {
     path: controller.rootPath + '/:userId',
     method: 'patch',
-    handler: controller.updateUser,
+    getHandler: (controller:any) => controller.updateUser,
+    controller,
+    root: "user",
   },
   {
     path: controller.rootPath + '/:userId',
     method: 'delete',
-    handler: controller.deleteUser,
+    getHandler: (controller:any) => controller.deleteUser,
+    controller,
+    root: "user",
   },
 ];
 

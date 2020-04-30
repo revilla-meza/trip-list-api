@@ -1,42 +1,56 @@
 import ItemController from './ItemController';
 
-const controller = new ItemController();
+const controller = ItemController;
 
 const Routes = [
   {
     path: controller.rootPath,
     method: 'get',
-    handler: controller.getAllItems,
+    getHandler: (controller:any) => controller.getAllItems,
+    controller,
+    root: "item"
   },
   {
     path: controller.rootPath + '/:itemId',
     method: 'get',
-    handler: controller.getOneItem,
+    getHandler: (controller:any) => controller.getOneItem,
+    controller,
+    root: "item"
   },
   {
     path: controller.rootPath,
     method: 'post',
-    handler: controller.createItem,
+    getHandler: (controller:any) => controller.createItem,
+    controller,
+    root: "item"
   },
   {
     path: controller.rootPath + '/:itemId',
     method: 'patch',
-    handler: controller.updateItem,
+    getHandler: (controller:any) => controller.updateItem,
+    controller,
+    root: "item"
   },
   {
     path: controller.rootPath + '/:itemId',
     method: 'delete',
-    handler: controller.deleteItem,
+    getHandler: (controller:any) => controller.deleteItem,
+    controller,
+    root: "item"
   },
   {
     path: controller.rootPath + '/list/:listId',
     method: 'get',
-    handler: controller.getItemsForList,
+    getHandler: (controller:any) => controller.getItemsForList,
+    controller,
+    root: "item"
   },
   {
     path: controller.rootPath + '/category/:categoryId',
     method: 'get',
-    handler: controller.getItemsForCategory,
+    getHandler: (controller:any) => controller.getItemsForCategory,
+    controller,
+    root: "item"
   },
 ];
 

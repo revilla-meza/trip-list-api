@@ -4,7 +4,7 @@ import { Item } from '../../entities/item.entity';
 import { IGetUserAuthInfoRequest } from "../../types";
 
 class ItemController {
-  public rootPath = '/item';
+  static rootPath = '/item';
 
   private itemRepository = getRepository(Item);
 

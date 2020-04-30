@@ -5,7 +5,7 @@ import { IGetUserAuthInfoRequest } from "../../types";
 
 
 class CategoryController {
-  public rootPath = '/category';
+  static rootPath = '/category';
 
   private categoryRepository = getRepository(Category);
  

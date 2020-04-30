@@ -1,32 +1,42 @@
 import ListController from './ListController';
 
-const controller = new ListController();
+const controller = ListController;
 
 const Routes = [
   {
     path: controller.rootPath,
     method: 'get',
-    handler: controller.getAllLists,
+    getHandler: (controller:any) => controller.getAllLists,
+    controller,
+    root: "list",
   },
   {
     path: controller.rootPath + '/:listId',
     method: 'get',
-    handler: controller.getOneList,
+    getHandler: (controller:any) => controller.getOneList,
+    controller,
+    root: "trip",
   },
   {
     path: controller.rootPath,
     method: 'post',
-    handler: controller.createList,
+    getHandler: (controller:any) => controller.createList,
+    controller,
+    root: "trip",
   },
   {
     path: controller.rootPath + '/:listId',
     method: 'patch',
-    handler: controller.updateList,
+    getHandler: (controller:any) => controller.updateList,
+    controller,
+    root: "trip",
   },
   {
     path: controller.rootPath + '/:listId',
     method: 'delete',
-    handler: controller.deleteList,
+    getHandler: (controller:any) => controller.deleteList,
+    controller,
+    root: "trip",
   },
 ];
 

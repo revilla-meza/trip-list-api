@@ -1,32 +1,42 @@
 import CategoryController from './CategoryController';
 
-const controller = new CategoryController();
+const controller = CategoryController;
 
 const Routes = [
   {
     path: controller.rootPath,
     method: 'get',
-    handler: controller.getAllCategories,
+    getHandler: (controller:any) => controller.getAllCategories,
+    controller,
+    root: "category",
   },
   {
     path: controller.rootPath + '/:categoryId',
     method: 'get',
-    handler: controller.getOneCategory,
+    getHandler: (controller:any) => controller.getOneCategory,
+    controller,
+    root: "category",
   },
   {
     path: controller.rootPath,
     method: 'post',
-    handler: controller.createCategory,
+    getHandler: (controller:any) => controller.createCategory,
+    controller,
+    root: "category",
   },
   {
     path: controller.rootPath + '/:categoryId',
     method: 'patch',
-    handler: controller.updateCategory,
+    getHandler: (controller:any) => controller.updateCategory,
+    controller,
+    root: "category",
   },
   {
     path: controller.rootPath + '/:categoryId',
     method: 'delete',
-    handler: controller.deleteCategory,
+    getHandler: (controller:any) => controller.deleteCategory,
+    controller,
+    root: "category",
   },
 ];
 

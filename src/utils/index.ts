@@ -9,8 +9,15 @@ export const applyMiddleware = (middlewareWrappers: Wrapper[], router: Router) =
 
 
 export const applyRoutes = (routes: Route[], router: Router) => {
+  const controllerInstances:any = {};
   for (const route of routes) {
-    const { method, path, handler } = route;
-    (router as any)[method](path, handler);
+    const { method, path, getHandler, root, controller } = route;
+
+    if (!controllerInstances[root]) {
+      controllerInstances[root] = new controller;
+    }
+    
+
+    (router as any)[method](path, getHandler(controllerInstances[root]));
   }
 };

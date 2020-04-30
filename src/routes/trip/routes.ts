@@ -1,32 +1,42 @@
 import TripController from './TripController';
 
-const controller = new TripController();
+const controller = TripController;
 
 const Routes = [
   {
     path: controller.rootPath,
     method: 'get',
-    handler: controller.getAllTrips,
+    getHandler: (controller:any) => controller.getAllTrips,
+    controller,
+    root: "trip",
   },
   {
     path: controller.rootPath + '/:tripId',
     method: 'get',
-    handler: controller.getOneTrip,
+    getHandler: (controller:any) => controller.getOneTrip,
+    controller,
+    root: "trip",
   },
   {
     path: controller.rootPath,
     method: 'post',
-    handler: controller.createTrip,
+    getHandler: (controller:any) => controller.createTrip,
+    controller,
+    root: "trip",
   },
   {
     path: controller.rootPath + '/:tripId',
     method: 'patch',
-    handler: controller.updateTrip,
+    getHandler: (controller:any) => controller.updateTrip,
+    controller,
+    root: "trip",
   },
   {
     path: controller.rootPath + '/:tripId',
     method: 'delete',
-    handler: controller.deleteTrip,
+    getHandler: (controller:any) => controller.deleteTrip,
+    controller,
+    root: "trip",
   },
 ];
 

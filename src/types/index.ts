@@ -18,5 +18,7 @@ export type Handler = (req: IGetUserAuthInfoRequest, res: Response, next: NextFu
 export type Route = {
   path: string;
   method: string;
-  handler: Handler | Handler[];
+  getHandler: (instance:any) => Handler | Handler[];
+  root: string;
+  controller: any;
 };

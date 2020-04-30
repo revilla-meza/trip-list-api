@@ -5,7 +5,7 @@ import { IGetUserAuthInfoRequest } from "../../types";
 
 
 class ListController {
-  public rootPath = '/list';
+  static rootPath = '/list';
 
   private listRepository = getRepository(List);
  
