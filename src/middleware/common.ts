@@ -1,7 +1,8 @@
-import { Router } from 'express';
+import { Router, NextFunction, Response } from 'express';
 import cors from 'cors';
 import parser from 'body-parser';
 import compression from 'compression';
+import { GetUserAuthInfoRequest } from '../types';
 
 export const handleCors = (router: Router) => router.use(cors({ credentials: true, origin: true }));
 
@@ -13,3 +14,10 @@ export const handleBodyRequestParsing = (router: Router) => {
 export const handleCompression = (router: Router) => {
   router.use(compression());
 };
+
+export const idUser = (router: Router) => {
+  router.use((req: GetUserAuthInfoRequest, res: Response, next: NextFunction) => {
+    req.user = req.headers.userid;
+    next();
+  });
+}
