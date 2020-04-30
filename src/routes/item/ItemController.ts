@@ -12,7 +12,7 @@ class ItemController {
     const items = 
       await this.itemRepository.find({
         where: { 
-          userId: request.user[process.env.AUTH0_AUDIENCE + '/userId'],
+         user: request.user,
         }
       });
 

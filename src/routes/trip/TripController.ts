@@ -13,7 +13,7 @@ class TripController {
   getAllTrips = async (request: GetUserAuthInfoRequest, response: Response) => {
     const trips = await this.tripRepository.find({
       where: {
-        userId: request.user[process.env.AUTH0_AUDIENCE + '/userId'],
+        user: request.user,
       },
     });
 
@@ -26,7 +26,7 @@ class TripController {
   };
 
   createTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const userId = request.user[process.env.AUTH0_AUDIENCE + '/userId'];
+    const userId = request.user;
 
     const newList = await this.listRepository.create({ user: userId, title: `List for ${request.body.trip.title}` });
 

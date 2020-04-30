@@ -13,7 +13,7 @@ class ListController {
     const lists = 
       await this.listRepository.find({
         where: { 
-          userId: request.user[process.env.AUTH0_AUDIENCE + '/userId'],
+         user: request.user,
         }
       });
 

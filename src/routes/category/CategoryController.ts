@@ -13,7 +13,7 @@ class CategoryController {
     const categories = 
       await this.categoryRepository.find({
         where: { 
-          userId: request.user[process.env.AUTH0_AUDIENCE + '/userId'],
+          user: request.user,
         }
       });
 
