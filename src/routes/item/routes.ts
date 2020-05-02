@@ -32,6 +32,34 @@ const Routes = [
     root: "item"
   },
   {
+    path: controller.rootPath + '/:itemId' + '/list/:listId/add',
+    method: 'patch',
+    getHandler: (controller:any) => controller.addItemToList,
+    controller,
+    root: "item"
+  },
+  {
+    path: controller.rootPath + '/:itemId' + '/list/:listId/remove',
+    method: 'patch',
+    getHandler: (controller:any) => controller.removeItemFromList,
+    controller,
+    root: "item"
+  },
+  {
+    path: controller.rootPath + '/:itemId' + '/category/:categoryId/remove',
+    method: 'patch',
+    getHandler: (controller:any) => controller.removeItemFromCategory,
+    controller,
+    root: "item"
+  },
+  {
+    path: controller.rootPath + '/:itemId' + '/category/:categoryId/add',
+    method: 'patch',
+    getHandler: (controller:any) => controller.addItemToCategory,
+    controller,
+    root: "item"
+  },
+  {
     path: controller.rootPath + '/:itemId',
     method: 'delete',
     getHandler: (controller:any) => controller.deleteItem,

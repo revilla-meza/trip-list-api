@@ -24,7 +24,7 @@ export class Item {
   @JoinTable()
   categories: Category[];
 
-  @ManyToMany(type => List, (list) => list.items, { nullable: false })
+  @ManyToMany(type => List, (list) => list.items)
   @JoinTable()
   lists: List[];
 }

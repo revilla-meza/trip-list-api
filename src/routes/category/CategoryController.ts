@@ -26,9 +26,14 @@ class CategoryController {
   }
 
   createCategory = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const category = await this.categoryRepository.create(request.body);
-    const results = await this.categoryRepository.save(category);
-    response.json(results);
+    try {
+      const category = await this.categoryRepository.create(request.body);
+      const results = await this.categoryRepository.save(category);
+      return response.json(results);
+    } catch (e) {
+      return response.json({ error: e.message });
+    }
+
   }
 
   updateCategory = async (request: GetUserAuthInfoRequest, response: Response) => {

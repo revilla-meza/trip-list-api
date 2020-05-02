@@ -38,6 +38,20 @@ const Routes = [
     controller,
     root: "list",
   },
+  {
+    path: controller.rootPath + '/:listId' + '/category/:categoryId/add',
+    method: 'patch',
+    getHandler: (controller:any) => controller.addCategoryToList,
+    controller,
+    root: "list"
+  },
+  {
+    path: controller.rootPath + '/:listId' + '/category/:categoryId/remove',
+    method: 'patch',
+    getHandler: (controller:any) => controller.removeCategoryFromList,
+    controller,
+    root: "list"
+  },
 ];
 
 export default Routes;
