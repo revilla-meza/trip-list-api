@@ -14,7 +14,7 @@ export class List {
   @ManyToMany(type => Item, (item) => item.lists)
   items: Item[];
 
-  @ManyToMany(type => Category, { cascade: true })
+  @ManyToMany(type => Category)
   @JoinTable()
   categories: Category[];
 
