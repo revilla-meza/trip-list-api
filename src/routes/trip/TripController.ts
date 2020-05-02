@@ -22,17 +22,20 @@ class TripController {
 
   getOneTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     const trip = await this.tripRepository.findOne(request.params.tripId);
+    if (!trip) {
+      return response.json({ error: `No trip with id ${request.params.tripId}` })
+    }
     response.json(trip);
   };
 
   createTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     const userId = request.user;
 
-    const newList = await this.listRepository.create({ user: userId, title: `List for ${request.body.trip.title}` });
+    const newList = await this.listRepository.create({ user: userId, title: `List for ${request.body.title}` });
 
-    const trip = await this.tripRepository.create(request.body.trip);
+    const trip: any = await this.tripRepository.create({ ...request.body, user: userId });
     
-    trip[0].list = newList;
+    trip.list = newList;
 
     const results = await this.tripRepository.save(trip);
     response.json(results);
@@ -40,6 +43,9 @@ class TripController {
 
   updateTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     const trip = await this.tripRepository.findOne(request.params.tripId);
+    if (!trip) {
+      return response.json({ error: `No trip with id ${request.params.tripId}` })
+    }
     this.tripRepository.merge(trip, request.body);
     const results = await this.tripRepository.save(trip);
     response.json(results);

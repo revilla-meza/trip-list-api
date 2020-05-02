@@ -14,6 +14,7 @@ class ListController {
       await this.listRepository.find({
         where: { 
          user: request.user,
+         relations: ["items"],
         }
       });
 
@@ -21,7 +22,7 @@ class ListController {
   }
 
   getOneList = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const list = await this.listRepository.findOne(request.params.listId);
+    const list = await this.listRepository.findOne(request.params.listId,{ relations: ["items"] });
     response.json(list);
   }
 

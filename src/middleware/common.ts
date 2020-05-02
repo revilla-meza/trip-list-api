@@ -17,7 +17,9 @@ export const handleCompression = (router: Router) => {
 
 export const idUser = (router: Router) => {
   router.use((req: GetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-    req.user = req.headers.userid;
+    if (req.headers.userid) {
+      req.user = req.headers.userid;
+    }
     next();
   });
 }

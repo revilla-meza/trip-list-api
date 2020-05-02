@@ -13,7 +13,7 @@ export class Trip {
   @JoinColumn()
   list: List;
 
-  @ManyToOne(type => User, user => user.trips)
+  @ManyToOne(type => User, user => user.trips, { nullable: false })
   user: User;
 
   @Column()

@@ -8,22 +8,23 @@ export class Item {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @Column()
   label: string;
 
-  @Column()
+  @Column({ nullable: true })
   image: string;
 
-  @ManyToOne((type) => User, (user) => user.items)
+  @ManyToOne((type) => User, (user) => user.items, { nullable: false })
   user: User;
 
   @ManyToMany((type) => Category)
   @JoinTable()
   categories: Category[];
 
-  @ManyToMany(type => List, (list) => list.items)
+  @ManyToMany(type => List, (list) => list.items, { nullable: false })
+  @JoinTable()
   lists: List[];
 }
