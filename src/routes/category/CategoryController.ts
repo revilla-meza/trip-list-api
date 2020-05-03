@@ -10,19 +10,33 @@ class CategoryController {
   private categoryRepository = getRepository(Category);
  
   getAllCategories = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const categories = 
+    try {
+      const categories = 
       await this.categoryRepository.find({
         where: { 
           user: request.user,
         }
       });
 
-    response.json(categories);
+      response.json(categories);
+    } catch(e) {
+      return response.json({ error: e.message });
+    }
+
   }
 
   getOneCategory = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const category = await this.categoryRepository.findOne(request.params.categoryId);
-    response.json(category);
+    try {
+      const category = await this.categoryRepository.findOne(request.params.categoryId);
+      if (!category) {
+        response.status(404);
+        return response.json({ error: `No category with id ${request.params.categoryId}` })
+      }
+      return response.json(category);
+    } catch(e) {
+      return response.json({ error: e.message });
+    }
+
   }
 
   createCategory = async (request: GetUserAuthInfoRequest, response: Response) => {

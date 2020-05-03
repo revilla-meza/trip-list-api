@@ -22,7 +22,7 @@ class ListController {
   }
 
   getOneList = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const list = await this.listRepository.findOne(request.params.listId,{ relations: ["items"] });
+    const list = await this.listRepository.findOne(request.params.listId);
     response.json(list);
   }
 
