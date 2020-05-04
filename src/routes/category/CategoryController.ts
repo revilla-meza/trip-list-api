@@ -51,15 +51,27 @@ class CategoryController {
   }
 
   updateCategory = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const category = await this.categoryRepository.findOne(request.params.categoryId);
-    this.categoryRepository.merge(category, request.body);
-    const results = await this.categoryRepository.save(category);
-    response.json(results);
+    try {
+      const category = await this.categoryRepository.findOne(request.params.categoryId);
+      if (!category) {
+        response.status(404);
+        return response.json({error: `No category found with id ${request.params.categoryId}`});
+      }
+      this.categoryRepository.merge(category, request.body);
+      const results = await this.categoryRepository.save(category);
+      return response.json(results);
+    } catch(e) {
+      return response.json({error: e.message})
+    }
   }
 
   deleteCategory = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const results = await this.categoryRepository.delete(request.params.categoryId);
-    response.json(results);
+    try {
+      const results = await this.categoryRepository.delete(request.params.categoryId);
+      return response.json(results);
+    } catch(e) {
+      return response.json({ error: e.message });
+    }
   }
 }
 

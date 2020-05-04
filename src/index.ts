@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import dbConfig from './ormconfig';
 import http from 'http';
-import express from 'express';
+import express, { response } from 'express';
 import { applyMiddleware, applyRoutes } from './utils';
 import { createConnection } from 'typeorm';
 import middleware from './middleware';

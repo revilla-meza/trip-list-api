@@ -8,38 +8,60 @@ class UserController {
 
   private userRepository = getRepository(User);
 
-  getOneUser = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const user = await this.userRepository.findOne(request.params.userId);
-    response.json({ user: user || null });
-  };
-
-  createUser = async (request: GetUserAuthInfoRequest, response: Response) => {
-    // interface body { email:string }
-    let results;
+  getAllUsers = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
-      const user = await this.userRepository.create(request.body);
-
-      results = await this.userRepository.save(user);
+      const users = await this.userRepository.find();
+      return response.json(users);
     } catch (e) {
       response.json({ error: e.message });
     }
+  };
 
-    response.json(results);
+  getOneUser = async (request: GetUserAuthInfoRequest, response: Response) => {
+    try {
+      const user = await this.userRepository.findOne(request.params.userId);
+      if (!user) {
+        response.status(404);
+        return response.json({ error: `no user with id: ${request.params.userId}` });
+      }
+      return response.json(user);
+    } catch (e) {
+      response.json({ error: e.message });
+    }
+  };
+
+  createUser = async (request: GetUserAuthInfoRequest, response: Response) => {
+    try {
+      const user = await this.userRepository.create(request.body);
+
+      let results = await this.userRepository.save(user);
+      return response.json(results);
+    } catch (e) {
+      response.json({ error: e.message });
+    }
   };
 
   updateUser = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const user = await this.userRepository.findOne(request.params.userId);
-    if (!user) {
-      return response.json({ error: `No user with id ${request.params.userId}` })
+    try {
+      const user = await this.userRepository.findOne(request.params.userId);
+      if (!user) {
+        return response.json({ error: `No user with id ${request.params.userId}` });
+      }
+      this.userRepository.merge(user, request.body);
+      const results = await this.userRepository.save(user);
+      return response.json(results);
+    } catch (e) {
+      response.json({ error: e.message });
     }
-    this.userRepository.merge(user, request.body);
-    const results = await this.userRepository.save(user);
-    response.json(results);
   };
 
   deleteUser = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const results = await this.userRepository.delete(request.params.userId);
-    response.json(results);
+    try {
+      const results = await this.userRepository.delete(request.params.userId);
+      return response.json(results);
+    } catch (e) {
+      response.json({ error: e.message });
+    }
   };
 }
 

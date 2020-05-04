@@ -9,7 +9,13 @@ const Routes = [
     getHandler: (controller:any) => controller.getOneUser,
     controller,
     root: "user",
-
+  },
+  {
+    path: controller.rootPath,
+    method: 'get',
+    getHandler: (controller:any) => controller.getAllUsers,
+    controller,
+    root: "user",
   },
   {
     path: controller.rootPath,

@@ -11,57 +11,96 @@ class ListController {
   private listRepository = getRepository(List);
  
   getAllLists = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const lists = 
-      await this.listRepository.find({
-        where: { 
-         user: request.user,
-        }
-      });
+    try {
+      const lists = 
+        await this.listRepository.find({
+          where: { 
+          user: request.user,
+          }
+        });
 
-    response.json(lists);
+    return response.json(lists);
+    } catch(e) {
+      response.json({error: e.message});
+    }
   }
 
   getOneList = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const list = await this.listRepository.findOne(request.params.listId);
-    response.json(list);
+    try {
+      const list = await this.listRepository.findOne(request.params.listId);
+      if (!list) {
+        response.status(404);
+        return response.json({error: `no list with id: ${request.params.listId}`});
+      }
+      return response.json(list);
+    } catch(e) {
+      return response.json({error:e.message});
+    }
   }
 
   createList = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const list = await this.listRepository.create(request.body);
-    const results = await this.listRepository.save(list);
-    response.json(results);
+    try {
+      const list = await this.listRepository.create(request.body);
+      const results = await this.listRepository.save(list);
+      return response.json(results);
+    } catch(e) {
+      return response.json({error: e.message});
+    }
   }
 
   updateList = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const list = await this.listRepository.findOne(request.params.listId);
-    this.listRepository.merge(list, request.body);
-    const results = await this.listRepository.save(list);
-    response.json(results);
+    try {
+      const list = await this.listRepository.findOne(request.params.listId);
+      if (!list) {
+        response.status(404);
+        return response.json({error: `no list with id: ${request.params.listId}`});
+      }
+      this.listRepository.merge(list, request.body);
+      const results = await this.listRepository.save(list);
+      return response.json(results);
+    } catch(e) {
+      return response.json({error: e.message});
+    }
+
   }
 
   deleteList = async (request: GetUserAuthInfoRequest, response: Response) => {
-    const results = await this.listRepository.delete(request.params.listId);
-    response.json(results);
+    try {
+      const results = await this.listRepository.delete(request.params.listId);
+      return response.json(results);
+    } catch(e) {
+      return response.json({error: e.message});
+    }
   }
 
   addCategoryToList = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
       await this.addOrRemoveRelation(request.params.listId, request.params.categoryId, "add");
+      const list = await this.listRepository.findOne(request.params.listId);
+      if (!list){
+        response.status(404);
+        return response.json({error: `no list with id: ${request.params.listId}`});
+      }
+      return response.json(list);
     } catch(e) {
       return response.json({error: e.message});
     }
-    const list = await this.listRepository.findOne(request.params.listId);
-    response.json(list);
+
   }
 
   removeCategoryFromList = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
       await this.addOrRemoveRelation(request.params.listId, request.params.categoryId, "remove");
+      const list = await this.listRepository.findOne(request.params.listId);
+      if (!list){
+        response.status(404);
+        return response.json({error: `no list with id: ${request.params.listId}`});
+      }
+      return response.json(list);
     } catch(e) {
       return response.json({error: e.message});
     }
-    const list = await this.listRepository.findOne(request.params.listId);
-    response.json(list);
+
   }
 
   addOrRemoveRelation = async (listId:string, categoryId:string, action:RelationMutation) => {

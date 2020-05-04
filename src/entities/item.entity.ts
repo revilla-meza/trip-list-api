@@ -17,6 +17,9 @@ export class Item {
   @Column({ nullable: true })
   image: string;
 
+  @Column({ nullable: true})
+  quantity: number;
+
   @ManyToOne((type) => User, (user) => user.items, { nullable: false })
   user: User;
 
