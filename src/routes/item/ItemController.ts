@@ -79,6 +79,9 @@ class ItemController {
       if (request.body.list) {
         await this.itemRepository.createQueryBuilder().relation(Item, 'lists').of(item).add(request.body.list);
       }
+      if (request.body.category) {
+        await this.itemRepository.createQueryBuilder().relation(Item, 'categories').of(item).add(request.body.category);
+      }
       return response.json(results);
     } catch (e) {
       return response.json({ error: e.message });
