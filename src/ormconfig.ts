@@ -9,7 +9,7 @@ const config: ConnectionOptions = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   entities,
-  synchronize: true,
+  synchronize: process.env.NODE_ENV === "local",
 };
  
 export default config;

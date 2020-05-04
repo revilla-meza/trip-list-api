@@ -31,5 +31,5 @@ createConnection(dbConfig).then(() => {
 
   const { PORT = 3000 } = process.env;
   const server = http.createServer(router);
-  server.listen(PORT, () => console.log(`Server is running http://localhost:${PORT}...`));
+  server.listen(PORT, () => console.log(`Server is running port ${PORT}...`));
 });

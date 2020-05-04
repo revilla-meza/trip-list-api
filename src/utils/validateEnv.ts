@@ -7,7 +7,8 @@ function validateEnv() {
     POSTGRES_USER: str(),
     POSTGRES_PASSWORD: str(),
     POSTGRES_DB: str(),
-    PORT: port()
+    PORT: port(),
+    NODE_ENV: str(),
   });
 }
 
