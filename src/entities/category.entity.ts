@@ -9,6 +9,10 @@ export class Category {
     @Column()
     name: string;
 
+    @Column({nullable: true})
+    color: string;
+
+
     @ManyToOne(type => User, user => user.categories, { nullable: false })
     user: User;
 }
