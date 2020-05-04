@@ -1,17 +1,14 @@
 import { Response } from 'express';
 import { getRepository } from 'typeorm';
 import { Item } from '../../entities/item.entity';
-import { List } from '../../entities/list.entity';
 import { GetUserAuthInfoRequest } from '../../types';
 
 type RelationMutation = 'add' | 'remove';
-type ItemRelationColumn = 'lists' | 'categories';
 
 class ItemController {
   static rootPath = '/item';
 
   private itemRepository = getRepository(Item);
-  private listRepository = getRepository(List);
 
   getAllItems = async (request: GetUserAuthInfoRequest, response: Response) => {
     const items = await this.itemRepository.find({
