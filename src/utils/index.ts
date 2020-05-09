@@ -20,4 +20,5 @@ export const applyRoutes = (routes: Route[], router: Router) => {
 
     (router as any)[method](path, getHandler(controllerInstances[root]));
   }
+  router.get('/', (req, res, next)=>{ res.send("ok health");})
 };
