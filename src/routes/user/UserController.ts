@@ -17,6 +17,19 @@ class UserController {
     }
   };
 
+  getUserByEmail = async (request: GetUserAuthInfoRequest, response: Response) => {
+    try {
+      const user = await this.userRepository.findOne({ email: request.headers.email});
+      if (!user) {
+        response.status(404);
+        return response.json({ error: `no user with email: ${request.headers.email}` });
+      }
+      return response.json(user);
+    } catch (e) {
+      response.json({ error: e.message });
+    }
+  };
+
   getOneUser = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
       const user = await this.userRepository.findOne(request.params.userId);
@@ -37,6 +50,7 @@ class UserController {
       let results = await this.userRepository.save(user);
       return response.json(results);
     } catch (e) {
+      response.status(400);
       response.json({ error: e.message });
     }
   };

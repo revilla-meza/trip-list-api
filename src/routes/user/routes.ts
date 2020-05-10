@@ -39,6 +39,13 @@ const Routes = [
     controller,
     root: "user",
   },
+  {
+    path: controller.rootPath + '/signin/email',
+    method: 'get',
+    getHandler: (controller:any) => controller.getUserByEmail,
+    controller,
+    root: "user",
+  }
 ];
 
 export default Routes;

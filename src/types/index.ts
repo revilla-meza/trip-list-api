@@ -2,6 +2,8 @@ import { Router, Request, Response, NextFunction } from 'express';
 
 export interface GetUserAuthInfoRequest extends Request {
   user: any;
+  query: any;
+  headers: any;
 }
 export enum TravelMethod {
   airplane = "airplane",
