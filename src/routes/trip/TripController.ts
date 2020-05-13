@@ -42,7 +42,7 @@ class TripController {
 
       const newList = await this.listRepository.create({ user: userId, title: `List for ${request.body.title}` });
 
-      const trip: any = await this.tripRepository.create(request.body);
+      const trip: any = await this.tripRepository.create({ user: userId, ...request.body });
 
       trip.list = newList;
 
