@@ -27,7 +27,8 @@ class ListController {
 
   getOneList = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
-      const list = await this.listRepository.findOne(request.params.listId);
+      const list = await this.listRepository.findOne(request.params.listId, {relations: ["items", "categories", "items.categories"]});
+
       if (!list) {
         response.status(404);
         return response.json({error: `no list with id: ${request.params.listId}`});

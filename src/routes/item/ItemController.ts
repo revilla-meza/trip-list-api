@@ -92,6 +92,12 @@ class ItemController {
         response.status(404);
         return response.json({error: `no item found with id: ${request.params.itemId}`})
       }
+      if (request.body.list) {
+        await this.itemRepository.createQueryBuilder().relation(Item, 'lists').of(item).add(request.body.list);
+      }
+      if (request.body.category) {
+        await this.itemRepository.createQueryBuilder().relation(Item, 'categories').of(item).add(request.body.category);
+      }
       this.itemRepository.merge(item, request.body);
       const results = await this.itemRepository.save(item);
       return response.json(results);
