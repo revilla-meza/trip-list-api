@@ -70,7 +70,7 @@ class ItemController {
 
   createItem = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
-      const item: any = await this.itemRepository.create(request.body);
+      const item: any = await this.itemRepository.create({...request.body, user: request.user});
       const results = await this.itemRepository.save(item);
 
       if (request.body.list) {
