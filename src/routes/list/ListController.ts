@@ -41,7 +41,7 @@ class ListController {
 
   createList = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
-      const list = await this.listRepository.create(request.body);
+      const list = await this.listRepository.create({...request.body, user: request.user });
       const results = await this.listRepository.save(list);
       return response.json(results);
     } catch(e) {
