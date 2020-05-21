@@ -9,6 +9,9 @@ export class Trip {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+  listId: number;
+
   @OneToOne(type => List, { cascade: true })
   @JoinColumn()
   list: List;
