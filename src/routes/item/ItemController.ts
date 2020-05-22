@@ -21,7 +21,6 @@ class ItemController {
   };
 
   getItemsForList = async (request: GetUserAuthInfoRequest, response: Response) => {
-    // add cat ids per item
     try {
       const items = await this.itemRepository.query(`SELECT
       item.* AS "item"
