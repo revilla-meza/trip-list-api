@@ -52,6 +52,13 @@ const Routes = [
     controller,
     root: "list"
   },
+  {
+    path: controller.rootPath + '/:listId/category/item',
+    method: 'get',
+    getHandler: (controller:any) => controller.getItemsByCategory,
+    controller,
+    root: "list"
+  },
 ];
 
 export default Routes;
