@@ -61,15 +61,18 @@ class ListController {
       const structure = list.items.reduce(
         (output: any, { id }: any) => {
           let noMatchingCategories = true;
-          categoryIdsForItemId[id].forEach((s: any, i: any) => {
+          categoryIdsForItemId[id].forEach((s: any, i: any, ar:any) => {
             if (output[s]) {
               output[s].push(id);
               noMatchingCategories = false;
             }
-            if (i === categoryIdsForItemId[id].length - 1 && noMatchingCategories) {
+            if (i === (ar.length - 1) && noMatchingCategories) {
               output['none'].push(id);
             }
           });
+          if(categoryIdsForItemId[id].length === 0) {
+            output['none'].push(id);
+          }
           return output;
         },
         { ...arraysForItemsByListCategory, none: [] },
