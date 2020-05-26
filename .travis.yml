@@ -14,4 +14,4 @@ deploy:
   script: bash scripts/deploy.sh
   # specify to deploy with code change a given branch
   on:
-    branch: develop
+    branch: dev
