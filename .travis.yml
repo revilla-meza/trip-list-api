@@ -11,7 +11,7 @@ services:
 deploy:
   provider: script
   # specify the deployment script
-  script: scripts/deploy.sh && scripts/deploy.sh
+  script: bash scripts/deploy.sh && scripts/deploy.sh
   # specify to deploy with code change a given branch
   on:
     branch: dev
