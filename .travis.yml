@@ -1,0 +1,17 @@
+# I am using a nodejs for my demo application
+language: node_js
+node_js:
+  - "node"
+
+# include the docker service so that we can use the docker command in
+# the deployment script
+services:
+  - docker
+# deployment section in the .travis.yml
+deploy:
+  provider: script
+  # specify the deployment script
+  script: bash scripts/deploy.sh
+  # specify to deploy with code change a given branch
+  on:
+    branch: develop
