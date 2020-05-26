@@ -24,4 +24,4 @@ docker tag luisrevilla/triplist-dev-api $IMAGE_REPO_URL:latest
 docker push $IMAGE_REPO_URL:latest
 
 # update an AWS ECS service with the new image
-ecs-deploy -c $CLUSTER_NAME -n $SERVICE_NAME -i $IMAGE_REPO_URL:latest
+ecs-deploy -c $CLUSTER_NAME -n $SERVICE_NAME -i $IMAGE_REPO_URL:latest --skip-deployments-check
