@@ -13,14 +13,14 @@ curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-de
 sudo chmod +x /usr/bin/ecs-deploy
 
 # login AWS ECR
-eval $(aws ecr get-login --region us-east-1)
+eval $(aws ecr get-login --region us-east-1 --no-include-email)
 
 # or login DockerHub
 # docker login --username $DOCKER_HUB_USER --password $DOCKER_HUB_PSW
 
 # build the docker image and push to an image repository
-docker build -t luisrevilla/triplist-dev-api:latest .
-docker tag luisrevilla/triplist-dev-api:latest $IMAGE_REPO_URL:latest
+docker build -t luisrevilla/triplist-dev-api .
+docker tag luisrevilla/triplist-dev-api $IMAGE_REPO_URL:latest
 docker push $IMAGE_REPO_URL:latest
 
 # update an AWS ECS service with the new image
