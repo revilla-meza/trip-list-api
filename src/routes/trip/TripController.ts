@@ -26,7 +26,7 @@ class TripController {
 
   getOneTrip = async (request: GetUserAuthInfoRequest, response: Response) => {
     try {
-      const trip = await this.tripRepository.findOne(request.params.tripId);
+      const trip = await this.tripRepository.findOne(request.params.tripId, { relations: ["list", "list.items", "list.categories"] });
       if (!trip) {
         return response.json({ error: `No trip with id ${request.params.tripId}` });
       }
