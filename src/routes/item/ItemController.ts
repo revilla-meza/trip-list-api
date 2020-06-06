@@ -79,7 +79,7 @@ class ItemController {
       if (request.body.category) {
         await this.itemRepository.createQueryBuilder().relation(Item, 'categories').of(item).add(request.body.category);
       }
-      return response.json(results);
+      return response.json({ listId: request.body.list, ...results });
     } catch (e) {
       return response.json({ error: e.message });
     }
